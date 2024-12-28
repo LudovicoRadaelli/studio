@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script> 
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Compiti per casa</title>
+</head>
+<body>
+    <h1>Problema 5c (Ross)</h1>
+    
+    <br>
+    
+    <div class="grayBorder">
+        Consideriamo una serie di prove aventi probabilità di successo \(a\) e di insuccesso \(b := 1 - a\).
+    <br>
+    Qual è la probabilità che una serie di \(n\) successi consecutivi si realizzi prima di una serie di \(m\) insuccessi consecutivi?
+    </div>
+    <br>
+    <br>
+
+    <b>Tentativo di soluzione</b>
+    <br>
+    <br>
+    Denotiamo con \(f(n, m)\) l'evento di cui si vuole calcolare la probabilità. Condizionando la 
+    probabilità all'esito della prima prova si ha che 
+    \[
+        f(n, m) = a\,f(n - 1, m) + b\,f(n, m - 1)
+    \]   
+    Osserviamo inoltre che 
+    <br>
+    <br>
+    <ul>
+        <li>
+            la probabilità \(f(1, k)\) che si realizzi un successo prima di \(k\) insuccessi è
+            \[
+                f(1, k) = 1 - b^{k} \qquad k \geq 2 
+            \]
+        </li>
+        <br>
+        <li>
+            la probabilità \(f(k, 1)\) che si realizzino \(k\) successi prima di un insuccesso è
+            \[
+                f(k, 1) = a^{k} \qquad k \geq 2 
+            \]
+        </li>
+    </ul>
+    
+
+    Il seguente esempio mostra come sia possibile sfruttare il triangolo di Pascal
+    per il calcolo di \(f(n, m)\).
+
+    <br>
+    <br>
+    <div id="slide-container1" class="slide-container grayBorder">
+        <div class="slide1">
+            <img src="img/ross5c(1).png" style="border: 0;">        
+        </div>
+        <div class="slide1">
+            <img src="img/ross5c(2).png" style="border: 0;">        
+        </div>
+        <div class="slide1">
+            <img src="img/ross5c(3).png" style="border: 0;">        
+        </div>
+        <div class="slide1">
+            <img src="img/ross5c(4).png" style="border: 0;">        
+        </div>
+    </div>
+    <div style="display: flex; flex-direction:row; justify-content: space-evenly; align-items: center;">
+        <button id="previousSlide-button1" onclick="previousSlide(1)">Indietro</button>
+        <button id="nextSlide-button1" onclick="nextSlide(1)">Avanti</button>
+    </div> 
+    
+    <br>
+    <br>
+    Si ha 
+    <div class="formula">
+        \[
+            f(7, 3) = 
+            \underset{\text{diag. discendente}}{\underbrace{\binom{5}{0} \, f(1, 3) \, a^6\,b^{0}+ \binom{6}{1} \, f(1, 2) \, a^6 \, b^{1}}} 
+            + 
+            \underset{\text{diag. ascendente}}{\underbrace{
+                \binom{6}{1} \, f(2, 1) \, a^5 \, b^{2} + 
+                \binom{5}{1} \, f(3, 1) \, a^4 \, b^{2} + 
+                \binom{4}{1} \, f(4, 1) \, a^3 \, b^{2} + 
+                \binom{3}{1} \, f(5, 1) \, a^2 \, b^{2} + 
+                \binom{2}{1} \, f(6, 1) \, a^1 \, b^{2} + 
+                \binom{1}{1} \, f(7, 1) \, a^0 \, b^{2} + 
+            }}
+
+        \]
+    </div>
+    <br>
+    <br>
+    Generalizzando la formula precedente si ha 
+    \[
+        \begin{align*}
+            &\sum_{k = 0}^{m - 2} \binom{n - 2 + k}{k}\,f(1, m - k)\,a^{n - 1}\,b^{k} + 
+            \\\\
+            &\sum_{k = 0}^{n - 2} \binom{n - k}{m - 2}\,f(2 + k, 1)\,a^{n - 2 - k}\,b^{m - 1}
+        \end{align*}
+    \]
+    
+    Ricordando le condizioni al contorno \(f(1, k) = 1 - b^{k}\) e \(f(k, 1) = a^k\) otteniamo
+    \[
+        \begin{align*}
+            &\sum_{k = 0}^{m - 2} \binom{n - 2 + k}{k}\,(1 - b^{m - k})\,a^{n - 1}\,b^{k} + 
+            \\\\
+            &\sum_{k = 0}^{n - 2} \binom{n - k}{m - 2}\,a^{2 + k}\,a^{n - 2 - k}\,b^{m - 1}
+        \end{align*}
+    \]
+    
+    <br>
+    <br>
+    <br>
+    
+
+    <b>Soluzione del testo</b>
+    <br>
+    <span style="color: gray; font-size: 0.9rem;" >In rosso evidenzio il punto che non mi convince</span>
+    <br>
+    <br>
+    Chiamiamo \(E\) l'evento di cui vogliamo calcolare la probabilità e condizioniamo 
+    rispetto all'esito del primo lancio (\(H\) è l'evento <i>"la prima prova ha successo"</i>).
+    \[
+        P(E) = a\,P(E\,|\, H) + b\,P(E\,|\, H^c) \qquad (*)
+    \]
+    Consideriamo \(P(E\,|\, H)\) e condizioniamolo ulteriormente rispetto all'evento \(F\) <i>"tutte le prove dalla \(2\) alla \(n\)
+    hanno successo"</i>.
+    <div class="formula">
+        \[
+            P(E\,|\, H) = P(E\,|\, FH) \, P(F\,|\, H) + P(E\,|\, F^cH) \, P(F^c\,|\, H)
+        \]
+    </div>
+    <br>
+    <br>
+    <ul>
+        <li>
+            Chiaramente \(P(E\,|\, FH) = 1\).     
+        </li>
+        <br>
+        <li>
+            Inoltre l'evento \(F^cH\) si realizza se la prima prova ha successo e almeno una delle restanti \(n-1\) prove ha esito negativo.
+            Quando capita un insuccesso, è come se i successi precedenti venissero cancellati e la situazione riparte come 
+            dall'inizio. 
+            <span style="color: red">
+                Ne segue che 
+                \[
+                    P(E \,|\, F^cH) = P(E \,|\, H^c)  
+                \]
+            </span>
+        </li>        
+        <li>
+            Siccome le prove sono indipendenti \(P(F\,|\,H) = P(F) = a^{n - 1}\)
+        </li>
+        <br>
+        <li>
+            Allo stesso modo \(P(F^c\,|\,H) = P(F^c) = 1 - a^{n - 1}\)
+        </li>
+    </ul>
+    
+    <br>
+    Sfruttando queste osservazioni possiamo riscrivere 
+    <div class="formula">
+        \[            
+          P(E\,|\,H) = a^{n - 1} + (1 - a^{n - 1}) \, P(E\,|\, H^c) 
+        \]
+    </div>
+
+    <br>
+
+    Lavoriamo sul termine \(P(E\,|\,H^c)\). 
+    <br>
+    Detto \(G\) l'evento <i>"le prime m prove sono degli insuccessi"</i>, con osservazioni del tutto analoghi a quelle appena
+    svolte otteniamo 
+    \[
+        P(E\,|\,H^c) = (1 - b^{m - 1})\,\,P(E\,|\,H)
+    \]
+
+    Risolvendo il sistema formato dalle ultime due equazioni  si ottiene
+    <div class="formula">
+        \[
+            \begin{align*}
+                &P(E\,|\,H) = \dfrac{a^{n - 1}}{a^{n - 1} + b^{m - 1} - a^{n - 1}\,b^{m - 1}}
+                \\\\
+                &P(E\,|\,H^c) = \dfrac{(1 - b^{m - 1})\, a^{n - 1}}{a^{n - 1} + b^{m - 1} - a^{n - 1}\,b^{m - 1}}
+            \end{align*}
+        \]
+        grazie alle quali possiamo riscrivere la \((*)\)
+        <div class="formula">
+            \[
+                \begin{align*}
+                    P(E) 
+                    = &\dfrac{a^{n} + b\,a^{n - 1}\,(1 - b^{m - 1})}{a^{n - 1} + b^{m - 1} - a^{n - 1}\,b^{m - 1}}
+                    \\\\
+                    = &\dfrac{a^{n - 1}(1 - b^{m})}{a^{n - 1} + b^{m - 1} - a^{n - 1}\,b^{m - 1}}
+                \end{align*}
+            \]
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+        
+    <script src="../js/hintAndSlide.js"></script>
+
+</body>

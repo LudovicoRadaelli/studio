@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- <script src="https://www.geogebra.org/apps/deployggb.js"></script> -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <title id="titleTag"><!-- Automatico --></title>
+</head>
+
+<body>
+        <br>
+        <div id="chapterNumber" style="display: none;"><!-- Numero del capitolo --></div>
+        <div id="paragraphTitle" style="display: none;">
+            <!-- Nome del paragrafo 
+                ATTENZIONE: 
+                DEVE COINCIDERE CON QUELLO SEGNATO SUL FILE json 
+                ALTRIMENTI LA NUMERAZIONE AUTOMATICA OPERATA DAL pageManager.js NON FUNZIONA
+            -->
+        </div>
+        
+        <div class="gray"> 
+            <div class="homeIconContainer">
+                <a href="../../indiceMateriale.html"><img class="homeIcon" src="../../../css/img/home.png"></a>
+            </div>
+            
+            <code><b id="bTagTitoloCapitolo">
+                <!-- Automatico -->
+            </b></code> 
+            <br>
+            <div class="select">
+                <div class="selected-option"><code><b id="bTagTitoloParagrafo">/ <!-- Automatico --></b></code></div>
+                <div class="dropdown">
+                    <!-- Automatico -->
+                </div>
+            </div>            
+        </div>
+
+        <br>
+
+        <nav class="navigationBar">
+            <div onclick="changeParagraph(`previous`)" class="item prev">
+                <img class="icon" src="../../../css/img/leftArrow.png">
+            </div>
+            <div class="item explanationButton">
+                <div onclick="showExplanation()"><img class="icon" src="../../../css/img/presentation.png"></div>
+            </div>
+            <div class="item exerciseButton">
+                <div onclick="showExercise()"><img class="icon" src="../../../css/img/homework.png"></div>
+            </div>
+            <div onclick="changeParagraph(`next`)" class="item next">
+                <img class="icon" src="../../../css/img/rightArrow.png">
+            </div>
+        </nav>
+
+        <br>
+
+    
+
+        <section class="explanation">
+    
+            <div class="h3">
+                <span class="sub-par" id="paragraphCircledNumber"><!-- Automatico --></span>
+                <h3 id="h3ParagraphTitle"><!-- Automatico --></h3>
+            </div>
+            
+            <br>
+
+            <div>
+                WORK IN PROGESS
+            </div>
+
+         </section>
+
+         <section class="exercise">
+            <div class="h3">
+                <span class="sub-par" id="exParagraphNumber"><!-- Automatico --></span>
+                <h3>Esercizi</h3>
+            </div>
+            <br>
+
+            <p>
+                <!-- Preambolo esercizio -->
+            </p>
+            
+            <br>
+
+            <!-- Esercizi -->
+            
+        </section>
+    
+
+
+    <script>
+        
+    </script>
+    
+    
+    
+    
+    
+    
+    
+
+
+    <br>
+    <br>
+
+    <script src="../../../js/pageManagment.js"></script>
+    <script src="../../../js/exerciseManagment.js"></script>
+</body>
